@@ -1,0 +1,13 @@
+{% extends 'blog/base.html'%}
+{% block title %}Signup{% endblock%}
+
+{% block content%}
+<h3>Register</h3>
+<form method ='post action ='signup'>
+
+    {{form.as_p}}
+    <button type="submit",  name ='save'>Register</button>
+</form>
+
+
+{% endblock%}

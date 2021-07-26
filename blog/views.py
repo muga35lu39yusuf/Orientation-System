@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from.models import QuesModel
+from .models import QuesModel
 from django.http import HttpResponse
 from users.forms import RegisterForm
 from django.contrib.auth.forms import UserCreationForm
@@ -37,7 +37,7 @@ def login(request):
 
 def quiz(request):
 
-    suf = QuesModel.objects.all()
+    #suf = QuesModel.objects.all()
     #return render(request,'blog/base.html',{'suf':suf})
 
     if request.method == 'POST':
@@ -50,11 +50,12 @@ def quiz(request):
         total=0
         for sufu in suf:
             total+=1
-            print(request.POST.get(sufu.question))
-            print(sufu.ans)
-            print()
-            if sufu.ans ==  request.POST.get(sufu.question):
-                score+=10
+            answer = request.POST.get(sufu.question)
+            #print(sufu.ans)
+            print(answer)
+            #print()
+            if sufu.ans ==  answer:
+                score+=4
                 correct+=1
             else:
                 wrong+=1
@@ -66,6 +67,7 @@ def quiz(request):
             'wrong':wrong,
             'percent':percent,
             'total':total
+
         }
         return render(request,'blog/result.html',context)
     else:

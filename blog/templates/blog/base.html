@@ -57,25 +57,48 @@
     </div>
     <div id = 'content', name = 'content' , class ='main'>
   {% block content %}
+  <form class="form-group" action="" method="POST">
 
-<form class="" action='#' method="post">
-<div
- <ul>
-    {%csrf_token%}
+
   {% for sufu in suf%}
-  <p> {{sufu.question}}</p>
 
-  <li><input type="radio" name="c{{op1.id}}" value="clicked">{{sufu.op1}}</li>
-  <li> <input type="radio" name="c{{op2.id}}" value="clicked">{{sufu.op2}}</li>
-  <li> <input type="radio" name="c{{op3.id}}" value="clicked">{{sufu.op3}}</li>
-  <li> <input type="radio" name="c{{op4.id}}" value="clicked">{{sufu.op4}}</li>
-  {% endfor%}
+    {%csrf_token%}
 
-  </ul>
 
-  <button type="submit" name=" submit">Submit</button>
 
-</form>
+
+
+    <table>
+      <tr>
+        <td>{{sufu.id}} ) {{sufu.question}}</td>
+      </tr>
+      <tr>
+        <td> <input type="radio"id = "op1" name ="{{sufu.id}}" value ={{sufu.op1}}>{{sufu.op1}}</td>
+      </tr>
+      <tr>
+        <td> <input type="radio"id = "op2" name ="{{sufu.id}}" value ={{sufu.op2}}>{{sufu.op2}}</td>
+      </tr>
+      <tr>
+        <td> <input type="radio"id = "op3" name ="{{sufu.id}}" value ={{sufu.op3}}>{{sufu.op3}}</td>
+      </tr>
+      <tr>
+        <td> <input type="radio"id = "op4" name ="{{sufu.id}}" value ={{sufu.op4}}>{{sufu.op4}}</td>
+      </tr>
+      <tr>
+        <td> <label id = "ans"><b>{{sufu.ans}}</b> </label>
+        </td>
+      </tr>
+    </table>
+
+
+
+
+
+
+{% endfor%}
+<input type="submit" name="" id = "/quiz.html" value="submit">
+<button type="Submit" class="" name="">Submit  <a href ="quiz"</button>
+  </form>
 
   {% endblock %}
 

@@ -1,8 +1,284 @@
-{%extends 'blog/base.html'%}
-{%block title%}
-Quiz
-{% endblock%}
+{% load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
 
-{%block content%}
- <h1> Welcome to Online Assesment</h1>
-{%endblock%}
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+     
+
+   {% block scripts%}
+     <script src="{% static 'blog/quiz.js'%}" defer> </script>
+   {% endblock scripts %}  
+
+<style type="text/css">
+
+.timer p {
+ text-align: right;
+ font-size: 30px;
+ margin-top: 0px;
+ color:#000000;
+}
+
+  .body {
+  margin: 0;
+  font-family: Merriweather,Georgia,self,Arial, Helvetica, sans-serif;
+  padding:20px;
+  background-color: #f8fafc;
+}
+  
+
+  h1{
+    text-align:center;
+  }
+
+.topnav {
+  overflow: hidden;
+  background-color: #421f44;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  color:white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.btn-wrapper .btn-secondary{
+  line-height:1;
+}
+
+.btn-wrapper btn-secondary{
+  text-align: start;
+}
+
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.main{
+  margin-left: 10px;
+  padding: 0px 70px;
+  background-color: #f8fafc;
+}
+
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity=
+    "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+
+    <title>quiz</title>
+  </head>
+  <body>
+
+  <div class="topnav">
+
+  <a href="/home">Home</a>
+  <div class="topnav-right">
+    <a class="greet">Yello, {{request.user}}</a>
+    <a href="/logout">Logout</a>
+
+</div>
+
+</div>
+
+
+
+    <div id = 'content', name = 'content' , class ='main'>
+
+
+  <form id ='quiz-form' method='POST' action=''class="form-disable">
+    {% if user.is_authenticated%}
+
+    {% else %}
+
+    {% endif %}
+    {% csrf_token %}
+   <div>
+    <h1> Attempt all Questions</h1>
+   <div class="timer"> 
+    <p id="demos"></p>
+  </div>
+    </div>
+
+    {% for sufu in msufu%}
+    <br>
+    {% if sufu.id < 12 %}
+    <div class="form-group">
+      <label for="question">{{sufu.id}}){{sufu.question}}</label>
+    </div>
+    <div class="form-check">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{sufu.question}}" id="{{sufu.op1}}" value={{sufu.op1}}>
+            <label class="form-check-label" for="{{sufu.op1}}">
+                {{sufu.op1}}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{sufu.question}}" id="{{sufu.op2}}" value={{sufu.op2}} >
+            <label class="form-check-label" for="{{sufu.op2}}">
+                {{sufu.op2}}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{sufu.question}}" id="{{sufu.op3}}" value={{sufu.op3}} >
+            <label class="form-check-label" for="{{sufu.op3}}">
+                {{sufu.op3}}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{sufu.question}}" id="{{sufu.op4}}" value={{sufu.op4}} >
+            <label class="form-check-label" for="{{sufu.op4}}">
+                {{sufu.op4}}
+            </label>
+        </div>
+    </div>
+    {% else %}
+    <table>
+      <tr>
+        <td>{{sufu.id}}){{sufu.question}}</td>
+        <br>
+      </tr>
+      <tr>
+        <!--<td> <input type="checkbox" id="op1" name ="{{sufu.id}}" value="{{sufu.op1}}"> {{sufu.op1}}</td>-->
+        <td> <label> <input type="checkbox" name="{{sufu.op1}}" value="{{sufu.op1}}"> {{sufu.op1}}</label><br></td>
+
+
+      </tr>
+      <tr>
+        <td> <label> <input type="checkbox" name="{{sufu.op2}}" value="{{sufu.op2}}"> {{sufu.op2}}</label><br></td>
+      </tr>
+      <tr>
+        <td> <label> <input type="checkbox" name="{{sufu.op3}}" value="{{sufu.op3}}"> {{sufu.op3}}</label><br></td>
+      </tr>
+      <tr>
+        <td> <label> <input type="checkbox" name="{{sufu.op4}}" value="{{sufu.op4}}"> {{sufu.op4}}</label><br></td>
+      </tr>
+    </table>
+    {% endif %} <br>
+
+    {% if sufu.id > 14 %}
+
+    <input id='timer' type='hidden' name="timer" value="">
+  
+    <button id ='Button' type="submit" class="btn btn-primary">Complete</button><br>
+    {% endif %}
+
+    {% endfor %}
+
+   <!--<div class="btn-wrapper text-center d-flex justify-content-between">-->
+    {% if msufu.has_previous %}<br>
+    
+    <!--<a class="btn btn-outline-info mb-4 mr-8" href="?page={{msufu.previous_page_number}}">Previous Page</a>-->
+    <!--<a class="btn btn-secondary  btn-sm text-white d-flex align-items-center" href="?page={{msufu.previous_page_number}}">Previous Page</a>-->
+    
+    {% endif %}
+   
+    {% if msufu.has_next%}
+    
+    
+    <!--<a class= "btn btn-outline-info mb-4" href="?page={{msufu.next_page_number}}">Next page</a> -->
+   <!-- <a class="btn btn-warning" href="?page={{msufu.next_page_number}}" >Next Page</a>-->
+
+    {% endif %}
+    <!--</div>-->
+    <div class="btn-wrapper text-center d-flex justify-content-md-between">
+      <!--{% if msufu.has_previous %}<br>-->
+      <a class="btn btn-secondary  btn-sm text-white d-flex align-items-center" href="?page={{msufu.previous_page_number}}">Previous</a>
+      
+      <!--{% endif %}-->
+      {% if msufu.has_next %}
+      <a class="btn btn-warning" href="?page={{msufu.next_page_number}}" >Next</a>
+      {% endif %}
+    </div>
+    
+
+  </form>
+
+
+
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity=
+"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin=
+"anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity=
+"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity=
+"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <script>
+
+    var countDownDate = new Date("sep 2, 2021 18:06:00").getTime();
+
+    var x = setInterval(function() {
+
+      var now = new Date().getTime();
+
+      var timeleft = countDownDate - now;
+
+      var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+      document.getElementById("demos").innerHTML =  hours + "h "
+      + minutes + "m " + seconds + "s ";
+
+      if (timeleft < 0) {
+        clearInterval(x);
+
+        document.getElementById("demos").innerHTML = "Thank You, Quiz is Expired";
+        document.getElementById("Button").disabled = true;
+
+      }
+    }, 1000);
+
+
+
+
+    </script>
+
+
+<script type="text/javascript">
+function ValidatePetSelection()
+{
+    var checkboxes = document.getElementsByName("{{sufu.id}}");
+    var numberOfCheckedItems = 0;
+    for(var i = 0; i < checkboxes.length; i++)
+    {
+        if(checkboxes[i].checked)
+            numberOfCheckedItems++;
+    }
+    if(numberOfCheckedItems > 2)
+    {
+        alert("You can't select more than answers");
+        return false;
+    }
+}
+</script>
+
+
+
+  </body>
+</html>

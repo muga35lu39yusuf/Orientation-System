@@ -3,6 +3,9 @@
 {% endblock%}
 
 {% block content %}
+<div class="container" >
+
+
 {% load crispy_forms_tags %}
  <form class="form-group" action="" method="POST">
    {%csrf_token%}
@@ -13,4 +16,5 @@
 
 
  </form>
+ </div>
 {% endblock %}

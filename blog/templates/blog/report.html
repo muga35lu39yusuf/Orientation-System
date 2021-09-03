@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Yusuf's report</title>
+    <style >
+   .table{
+      border: 1px solid black;
+
+   }
+   .score {
+font-size:20px;
+color:crimson;
+font-style:italic;
+}
+
+    </style>
+  </head>
+  <body>
+    <!--
+    <h5 class="card-title">Score: {{score}}</h5>
+
+    <p class="card-text">Correct answers: {{correct}}</p>
+    <p class="card-text">Incorrect answers: {{wrong}}</p>
+    <p class="card-text">Total questions: {{total}}</p>
+    <h5>Thank you for attempting this Quiz!</h5> -->
+
+
+      <p>{{request.user}}</p>
+
+<table border="1">
+<!--<caption id="score">Yusuf's Report</caption>-->
+   <thead>
+     <tr>
+       <th>Score</th>
+       <th>Percentage</th>
+       <th>correct answers</th>
+       <th>incorrect answers</th>
+       <th>Total Questions</th>
+     </tr>
+   </thead>
+
+    <tr>
+      <td> 28</td>
+      <td> 46.7%</td>
+      <td> 7</td>
+      <td> 8</td>
+      <td> 15</td>
+    
+
+    </tr>
+
+</table>
+
+  </body>
+</html>
